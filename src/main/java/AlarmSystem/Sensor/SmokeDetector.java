@@ -1,9 +1,13 @@
 package AlarmSystem.Sensor;
 
+import java.util.Random;
+
 public class SmokeDetector implements ISensor {
 
     private int ID;
     private double threshold;
+
+    private final Random rnd = new Random();
 
     @Override
     public double getThreshold() {
@@ -17,7 +21,6 @@ public class SmokeDetector implements ISensor {
 
     @Override
     public double readSignal() {
-        // TODO - implement SmokeDetector.readSignal
-        throw new UnsupportedOperationException();
+        return 100 * rnd.nextDouble();
     }
 }
