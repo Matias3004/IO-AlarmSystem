@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 public class BurglaryDetector {
 
-    private ArrayList<MovementDetector> movementDetectors;
-    private ArrayList<OpeningDetector> openingDetectors;
+    private final ArrayList<MovementDetector> movementDetectors;
+    private final ArrayList<OpeningDetector> openingDetectors;
 
     public BurglaryDetector(ArrayList<MovementDetector> movementDetectors, ArrayList<OpeningDetector> openingDetectors) {
         this.movementDetectors = movementDetectors;
