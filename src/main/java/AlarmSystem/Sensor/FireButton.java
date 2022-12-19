@@ -17,14 +17,19 @@ public class FireButton implements ISensor {
 
     @Override
     public void setThreshold(double threshold) {
-
+        this.threshold = threshold;
     }
 
     @Override
     public double readSignal() {
-        if (rnd.nextBoolean())
+        if (rnd.nextBoolean()) {
+            this.signal = 1.0;
+
             return 1;
-        else
+        } else {
+            this.signal = 0.0;
+
             return 0;
+        }
     }
 }
