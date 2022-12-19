@@ -4,32 +4,36 @@ import java.util.Random;
 
 public class FireButton implements ISensor {
 
-    private int ID;
-    private double signal;
-    private double threshold;
+    private final int ID;
+    private final String location;
+    private boolean isPressed;
 
-    private final Random rnd = new Random();
+    private final Random rnd;
 
-    @Override
-    public double getThreshold() {
-        return 0;
+    public FireButton(int id, String location) {
+        rnd = new Random();
+        this.ID = id;
+        this.location = location;
     }
 
-    @Override
-    public void setThreshold(double threshold) {
-        this.threshold = threshold;
+    public int getID() {
+        return ID;
+    }
+
+    public String getLocation() {
+        return location;
     }
 
     @Override
     public double readSignal() {
         if (rnd.nextBoolean()) {
-            this.signal = 1.0;
+            this.isPressed = true;
 
-            return 1;
+            return 1.0;
         } else {
-            this.signal = 0.0;
+            this.isPressed = false;
 
-            return 0;
+            return 0.0;
         }
     }
 }
