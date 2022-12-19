@@ -1,5 +1,7 @@
 package AlarmSystem.Sensor;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class TemperatureDetector implements ISensor {
 
     private int ID;
@@ -17,7 +19,6 @@ public class TemperatureDetector implements ISensor {
 
     @Override
     public double readSignal() {
-        // TODO - implement TemperatureDetector.readSignal
-        throw new UnsupportedOperationException();
+        return ThreadLocalRandom.current().nextDouble(18, 800);
     }
 }
