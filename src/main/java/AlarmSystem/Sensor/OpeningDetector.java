@@ -6,16 +6,14 @@ public class OpeningDetector implements ISensor {
 
     private final int ID;
     private final String location;
-    private final double threshold;
     private boolean isOpen;
 
     private final Random rnd;
 
-    public OpeningDetector(int id, String location, double threshold) {
+    public OpeningDetector(int id, String location) {
         rnd = new Random();
         this.ID = id;
         this.location = location;
-        this.threshold = threshold;
     }
 
     public int getID() {
@@ -24,10 +22,6 @@ public class OpeningDetector implements ISensor {
 
     public String getLocation() {
         return location;
-    }
-
-    public double getThreshold() {
-        return threshold;
     }
 
     @Override
