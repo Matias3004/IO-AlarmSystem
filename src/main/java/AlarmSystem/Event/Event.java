@@ -6,6 +6,8 @@ public class Event {
     private String location;
     private EventType type;
 
+    public int dupa;
+
     public String getTime() {
         return time;
     }
