@@ -1,5 +1,7 @@
 package AlarmSystem.Sensor;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class MovementDetector implements ISensor {
 
     private int ID;
@@ -17,6 +19,9 @@ public class MovementDetector implements ISensor {
 
     @Override
     public double readSignal() {
-        throw new UnsupportedOperationException();
+        if (ThreadLocalRandom.current().nextBoolean())
+            return 1;
+        else
+            return 0;
     }
 }
