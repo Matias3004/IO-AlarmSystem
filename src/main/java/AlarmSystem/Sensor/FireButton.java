@@ -1,10 +1,14 @@
 package AlarmSystem.Sensor;
 
+import java.util.Random;
+
 public class FireButton implements ISensor {
 
     private int ID;
     private double signal;
     private double threshold;
+
+    private final Random rnd = new Random();
 
     @Override
     public double getThreshold() {
@@ -18,6 +22,9 @@ public class FireButton implements ISensor {
 
     @Override
     public double readSignal() {
-        return 0;
+        if (rnd.nextBoolean())
+            return 1;
+        else
+            return 0;
     }
 }
