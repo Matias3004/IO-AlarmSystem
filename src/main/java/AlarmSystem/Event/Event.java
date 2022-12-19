@@ -6,6 +6,11 @@ public class Event {
     private String location;
     private EventType type;
 
+    public Event(String time, String location, EventType eventType) {
+        this.time = time;
+        this.location = location;
+        this.type = eventType;
+    }
 
     public String getTime() {
         return time;
