@@ -5,18 +5,14 @@ import java.util.Random;
 public class OpeningDetector implements ISensor {
 
     private int ID;
+    private String location;
+    private double threshold;
     private boolean isOpen;
 
     private final Random rnd = new Random();
 
-    @Override
-    public double getThreshold() {
-        return 0;
-    }
-
-    @Override
-    public void setThreshold(double threshold) {
-
+    public String getLocation() {
+        return this.location;
     }
 
     @Override
