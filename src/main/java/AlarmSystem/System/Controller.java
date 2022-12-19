@@ -2,25 +2,35 @@ package AlarmSystem.System;
 
 import AlarmSystem.Event.Event;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Controller {
 
+    private final Scanner in = new Scanner(System.in);
+
     private boolean isActive;
-    private Alarm[] alarms;
-    private Event[] events;
+    private ArrayList<Alarm> alarms;
+    private ArrayList<Event> events;
+    private final Monitor monitor = new Monitor();
+    private final Authorization authorization = new Authorization();
 
     public boolean isActive() {
         return this.isActive;
     }
 
-    public static void main(String[] args) {
-        // TODO - implement Controller.main
-        System.out.println("Seima");
-        throw new UnsupportedOperationException();
+    public Controller() {
+        System.out.print("Aktywować system? [T/N]: ");
+        String answer = in.nextLine();
+        if (answer.equalsIgnoreCase("N")) return;
+
+        isActive = activateSystem();
     }
 
-    public boolean activateSystem(Authorization authorization) {
-        // TODO - implement Controller.activateSystem
-        throw new UnsupportedOperationException();
+    public boolean activateSystem() {
+        monitor.monitor();
+
+        return true;
     }
 
     public boolean deactivateSystem(Authorization authorization) {

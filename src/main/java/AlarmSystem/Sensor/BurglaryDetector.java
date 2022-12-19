@@ -11,7 +11,12 @@ public class BurglaryDetector {
     private ArrayList<MovementDetector> movementDetectors;
     private ArrayList<OpeningDetector> openingDetectors;
 
-    public Event monitorBurglary(MovementDetector[] movementDetectors, OpeningDetector[] openingDetectors) {
+    public BurglaryDetector(ArrayList<MovementDetector> movementDetectors, ArrayList<OpeningDetector> openingDetectors) {
+        this.movementDetectors = movementDetectors;
+        this.openingDetectors = openingDetectors;
+    }
+
+    public Event monitorBurglary() {
         while (true) {
             for (MovementDetector detector : movementDetectors) {
                 if (detector.readSignal() != 1.0) continue;

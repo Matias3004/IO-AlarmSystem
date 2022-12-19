@@ -12,7 +12,13 @@ public class FireDetector {
     private ArrayList<SmokeDetector> smokeDetectors;
     private ArrayList<FireButton> fireButtons;
 
-    public Event monitorFire(ArrayList<SmokeDetector> smokeDetectors, ArrayList<TemperatureDetector> tempDetectors, ArrayList<FireButton> fireButtons) {
+    public FireDetector(ArrayList<TemperatureDetector> tempDetectors, ArrayList<SmokeDetector> smokeDetectors, ArrayList<FireButton> fireButtons) {
+        this.tempDetectors = tempDetectors;
+        this.smokeDetectors = smokeDetectors;
+        this.fireButtons = fireButtons;
+    }
+
+    public Event monitorFire() {
         while (true) {
             for (SmokeDetector detector : smokeDetectors) {
                 if (detector.readSignal() < detector.getThreshold()) continue;

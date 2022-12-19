@@ -1,15 +1,17 @@
 package AlarmSystem.System;
 
+import java.util.ArrayList;
+
 public class Authorization {
 
-    private User[] users;
+    private ArrayList<User> users;
     private int sessionDuration;
 
-    public User[] getUsers() {
+    public ArrayList<User> getUsers() {
         return users;
     }
 
-    public void setUsers(User[] users) {
+    public void setUsers(ArrayList<User> users) {
         this.users = users;
     }
 
