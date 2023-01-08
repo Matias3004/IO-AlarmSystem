@@ -3,8 +3,7 @@ package AlarmSystem.System;
 public class UserData {
 
     private int id;
-    private String firstName;
-    private String lastName;
+    private String username;
     private String password;
 
     public int getId() {
@@ -15,20 +14,12 @@ public class UserData {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

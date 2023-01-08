@@ -5,6 +5,10 @@ public class User {
     private String authTime;
     private UserData userData;
 
+    public User(String username) {
+        this.userData.setUsername(username);
+    }
+
     public String getAuthTime() {
         return authTime;
     }

@@ -8,9 +8,11 @@ import java.util.ArrayList;
 
 public class FireDetector {
 
-    private ArrayList<TemperatureDetector> tempDetectors;
-    private ArrayList<SmokeDetector> smokeDetectors;
-    private ArrayList<FireButton> fireButtons;
+    private final ArrayList<TemperatureDetector> tempDetectors;
+    private final ArrayList<SmokeDetector> smokeDetectors;
+    private final ArrayList<FireButton> fireButtons;
+
+    private ArrayList<Event> foundEvents;
 
     public FireDetector(ArrayList<TemperatureDetector> tempDetectors, ArrayList<SmokeDetector> smokeDetectors, ArrayList<FireButton> fireButtons) {
         this.tempDetectors = tempDetectors;
@@ -18,23 +20,49 @@ public class FireDetector {
         this.fireButtons = fireButtons;
     }
 
-    public Event monitorFire() {
+    public void monitorFire() throws InterruptedException {
+        foundEvents = new ArrayList<>();
         while (true) {
             for (SmokeDetector detector : smokeDetectors) {
-                if (detector.readSignal() < detector.getThreshold()) continue;
+                System.out.println("Sprawdzanie czujnika dymu nr " + detector.getID() +
+                        " w miejscu " + detector.getLocation());
 
-                return new Event(LocalDateTime.now().toString(), detector.getLocation(), EventType.FIRE);
+                Thread.sleep(500);
+
+                if (detector.readSignal() < detector.getThreshold())
+                    System.out.println("Jest czysto");
+                else
+                    foundEvents.add(new Event(LocalDateTime.now().toString(), detector.getLocation(), EventType.FIRE));
             }
             for (TemperatureDetector detector : tempDetectors) {
-                if (detector.readSignal() < detector.getThreshold()) continue;
+                System.out.println("Sprawdzanie czujnika temperatury nr " + detector.getID() +
+                        " w miejscu " + detector.getLocation());
 
-                return new Event(LocalDateTime.now().toString(), detector.getLocation(), EventType.FIRE);
+                Thread.sleep(500);
+
+                if (detector.readSignal() < detector.getThreshold()) {
+                    System.out.println("Jest czysto");
+                }
+                else
+                    foundEvents.add(new Event(LocalDateTime.now().toString(), detector.getLocation(), EventType.FIRE));
             }
             for (FireButton button : fireButtons) {
-                if (button.readSignal() != 1.0) continue;
+                System.out.println("Sprawdzanie przycisku nr " + button.getID() +
+                        " w miejscu " + button.getLocation());
 
-                return new Event(LocalDateTime.now().toString(), button.getLocation(), EventType.FIRE);
+                Thread.sleep(500);
+
+                if (button.readSignal() != 1.0)
+                    System.out.println("Jest czysto");
+                else
+                    foundEvents.add(new Event(LocalDateTime.now().toString(), button.getLocation(), EventType.FIRE));
             }
+
+            if (!foundEvents.isEmpty()) return;
         }
+    }
+
+    public ArrayList<Event> getFoundEvents() {
+        return foundEvents;
     }
 }

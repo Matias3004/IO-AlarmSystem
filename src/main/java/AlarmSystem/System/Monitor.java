@@ -10,12 +10,12 @@ public class Monitor {
     private final FireDetector fireDetector;
     private final BurglaryDetector burglaryDetector;
 
-    private ArrayList<TemperatureDetector> temperatureDetectors;
-    private ArrayList<SmokeDetector> smokeDetectors;
-    private ArrayList<FireButton> fireButtons;
+    private final ArrayList<TemperatureDetector> temperatureDetectors;
+    private final ArrayList<SmokeDetector> smokeDetectors;
+    private final ArrayList<FireButton> fireButtons;
 
-    private ArrayList<OpeningDetector> openingDetectors;
-    private ArrayList<MovementDetector> movementDetectors;
+    private final ArrayList<OpeningDetector> openingDetectors;
+    private final ArrayList<MovementDetector> movementDetectors;
 
     public Monitor() {
         temperatureDetectors = new ArrayList<>();
@@ -32,13 +32,15 @@ public class Monitor {
         burglaryDetector = new BurglaryDetector(movementDetectors, openingDetectors);
     }
 
-    public void monitor() {
-        ArrayList<Event> events = new ArrayList<>();
-        events.add(fireDetector.monitorFire());
-        events.add(burglaryDetector.monitorBurglary());
+    public void monitor() throws InterruptedException {
+        ArrayList<Event> events;
+
+        fireDetector.monitorFire();
+        events = fireDetector.getFoundEvents();
+        // events.add(burglaryDetector.monitorBurglary());
 
         for (Event event : events) {
-            event.toString();
+            System.out.println(event.toString());
         }
     }
 

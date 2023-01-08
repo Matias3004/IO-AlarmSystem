@@ -1,11 +1,14 @@
 package AlarmSystem.System;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Authorization {
 
     private ArrayList<User> users;
     private int sessionDuration;
+
+    Scanner in = new Scanner(System.in);
 
     public ArrayList<User> getUsers() {
         return users;
@@ -16,8 +19,10 @@ public class Authorization {
     }
 
     public boolean authorize(User user) {
-        // TODO - implement Authorization.authorize
-        throw new UnsupportedOperationException();
+        System.out.print("Podaj hasło: ");
+        String password = in.nextLine();
+
+        return user.getUserData().getPassword().equals(password);
     }
 
     public boolean logout(User user) {
