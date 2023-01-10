@@ -29,34 +29,37 @@ public class Controller {
         * */
 
         while(true) {
-            if (!isActive()) {
+            if (isActive())
+                System.out.println("2. Deactivate the system");
+            else
                 System.out.println("1. Activate the system");
-            } else {
-                System.out.println("1. Deactivate the system");
-            }
+
             System.out.println("2. Settings");
             System.out.println("3. Quit");
+            System.out.print("Choice: ");
 
             String answer = in.nextLine();
 
-            switch (answer){
-                case "1":
-                    if(!isActive()){
-                        System.out.println("The system was activated!");
+            switch (answer) {
+                case "1" -> {
+                    if (!isActive()) {
                         activateSystem(authorization);
-                    }else{
+                        isActive = true;
+
+                        System.out.println("The system was activated!");
+                    } else {
                         deactivateSystem(authorization);
+                        isActive = false;
 
                         System.out.println("The system was deactivated!");
                     }
-                    break;
-                case "2":
-                    System.out.println("TODO ustawienia może progów na czujnikach czy tam numerów telefonów służb");
-                    break;
-                case "3":
-                    System.exit(0);
-                    break;
-
+                }
+                case "2" ->
+                        System.out.println("TODO ustawienia może progów na czujnikach czy tam numerów telefonów służb");
+                case "3" -> System.exit(0);
+                default -> {
+                    return;
+                }
             }
         }
     }
