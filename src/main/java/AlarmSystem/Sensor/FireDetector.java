@@ -41,9 +41,6 @@ public class FireDetector implements Runnable {
     public void monitorFire() {
         while (isActive) {
             for (SmokeDetector detector : smokeDetectors) {
-
-//                System.out.println("Czujnik dymu " + detector.getID()
-//                        + ", " + detector.getLocation());
                 if (detector.readSignal() >= detector.getThreshold() && !containsEventByLocationType(detector.getLocation(), EventType.FIRE)) {
                     reportedEvents.add(new Event(LocalDateTime.now().format(formatter),
                             detector.getLocation(),
@@ -52,8 +49,6 @@ public class FireDetector implements Runnable {
             }
 
             for (TemperatureDetector detector : tempDetectors) {
-//                System.out.println("Czujnik temperatury " + detector.getID()
-//                        + ", " + detector.getLocation());
                 if (detector.readSignal() >= detector.getThreshold() && !containsEventByLocationType(detector.getLocation(), EventType.FIRE)) {
                     reportedEvents.add(new Event(LocalDateTime.now().format(formatter),
                             detector.getLocation(),
@@ -62,10 +57,7 @@ public class FireDetector implements Runnable {
             }
 
             for (FireButton button : fireButtons) {
-
-//                System.out.println("Przycisk " + button.getID()
-//                        + ", " + button.getLocation());
-                if (button.readSignal() == 1.0 && !containsEventByLocationType(button.getLocation(), EventType.FIRE)) {
+                if (button.readSignal() == 1.0 &&!containsEventByLocationType(button.getLocation(), EventType.FIRE)) {
                     reportedEvents.add(new Event(LocalDateTime.now().format(formatter),
                             button.getLocation(),
                             EventType.FIRE));

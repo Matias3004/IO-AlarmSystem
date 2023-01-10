@@ -49,10 +49,8 @@ public class Monitor {
         fireEvents = fireDetector.getReportedEvents();
         trespassingEvents = burglaryDetector.getReportedEvents();
 
-        int it = 0;
-        for (it = 0; it < fireEvents.size(); it++) {
-            System.out.println(fireEvents.get(it).toString());
-
+        for (Event fireEvent : fireEvents) {
+            System.out.println(fireEvent.toString());
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
@@ -60,16 +58,14 @@ public class Monitor {
             }
         }
 
-        for (it = 0; it < trespassingEvents.size(); it++) {
-            System.out.println(trespassingEvents.get(it).toString());
-
+        for (Event trespassingEvent : trespassingEvents) {
+            System.out.println(trespassingEvent.toString());
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         }
-
     }
 
     public void initializeFireSensors() {
