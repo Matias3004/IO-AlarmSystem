@@ -20,14 +20,46 @@ public class Controller {
     }
 
     public Controller() throws InterruptedException {
-        System.out.print("Aktywować system? [T/N]: ");
-        String answer = in.nextLine();
-        if (answer.equalsIgnoreCase("N")) return;
 
-        isActive = activateSystem();
+        /*1. Aktywować system
+          2. Dezaktywacja alarmu
+          3. Ustawienia
+          4. Wyjdź
+        * */
+
+        while(true) {
+            if (!isActive()) {
+                System.out.println("1. Activate the system");
+            } else {
+                System.out.println("1. Deactivate the system");
+            }
+            System.out.println("2. Settings");
+            System.out.println("3. Quit");
+
+            String answer = in.nextLine();
+
+            switch (answer){
+                case "1":
+                    if(!isActive()){
+                        System.out.println("The system was activated!");
+                        activateSystem(authorization);
+                    }else{
+                        deactivateSystem(authorization);
+                        System.out.println("The system was deactivated!");
+                    }
+                    break;
+                case "2":
+                    System.out.println("TODO ustawienia może progów na czujnikach czy tam numerów telefonów służb");
+                    break;
+                case "3":
+                    System.exit(0);
+                    break;
+
+            }
+        }
     }
 
-    public boolean activateSystem() throws InterruptedException {
+    public boolean activateSystem(Authorization authorization) throws InterruptedException {
         monitor.monitor();
 
         return true;

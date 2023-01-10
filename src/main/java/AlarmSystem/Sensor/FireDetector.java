@@ -11,7 +11,6 @@ public class FireDetector {
     private final ArrayList<TemperatureDetector> tempDetectors;
     private final ArrayList<SmokeDetector> smokeDetectors;
     private final ArrayList<FireButton> fireButtons;
-
     private ArrayList<Event> foundEvents;
 
     public FireDetector(ArrayList<TemperatureDetector> tempDetectors, ArrayList<SmokeDetector> smokeDetectors, ArrayList<FireButton> fireButtons) {
@@ -64,5 +63,14 @@ public class FireDetector {
 
     public ArrayList<Event> getFoundEvents() {
         return foundEvents;
+    }
+
+    public boolean containsEventByLocationType(String location, EventType type) {
+        for (Event ev : foundEvents){
+            if (ev.getLocation().equals(location) && ev.getType().equals(type)){
+                return true;
+            }
+        }
+        return false;
     }
 }
