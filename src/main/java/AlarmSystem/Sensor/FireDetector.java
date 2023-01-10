@@ -4,6 +4,7 @@ import AlarmSystem.Event.Event;
 import AlarmSystem.Event.EventType;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class FireDetector implements Runnable {
@@ -15,6 +16,8 @@ public class FireDetector implements Runnable {
     private final ArrayList<FireButton> fireButtons;
 
     private final ArrayList<Event> reportedEvents;
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public FireDetector(ArrayList<TemperatureDetector> tempDetectors, ArrayList<SmokeDetector> smokeDetectors, ArrayList<FireButton> fireButtons) {
         this.tempDetectors = tempDetectors;
@@ -40,7 +43,7 @@ public class FireDetector implements Runnable {
 //                System.out.println("Czujnik dymu " + detector.getID()
 //                        + ", " + detector.getLocation());
                 if (detector.readSignal() >= detector.getThreshold()) {
-                    reportedEvents.add(new Event(LocalDateTime.now().toString(),
+                    reportedEvents.add(new Event(LocalDateTime.now().format(formatter),
                             detector.getLocation(),
                             EventType.FIRE));
                 }
@@ -50,7 +53,7 @@ public class FireDetector implements Runnable {
 //                System.out.println("Czujnik temperatury " + detector.getID()
 //                        + ", " + detector.getLocation());
                 if (detector.readSignal() >= detector.getThreshold()) {
-                    reportedEvents.add(new Event(LocalDateTime.now().toString(),
+                    reportedEvents.add(new Event(LocalDateTime.now().format(formatter),
                             detector.getLocation(),
                             EventType.FIRE));
                 }
@@ -60,7 +63,7 @@ public class FireDetector implements Runnable {
 //                System.out.println("Przycisk " + button.getID()
 //                        + ", " + button.getLocation());
                 if (button.readSignal() == 1.0) {
-                    reportedEvents.add(new Event(LocalDateTime.now().toString(),
+                    reportedEvents.add(new Event(LocalDateTime.now().format(formatter),
                             button.getLocation(),
                             EventType.FIRE));
                 }

@@ -4,6 +4,7 @@ import AlarmSystem.Event.Event;
 import AlarmSystem.Event.EventType;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class BurglaryDetector implements Runnable {
@@ -14,6 +15,9 @@ public class BurglaryDetector implements Runnable {
     private final ArrayList<OpeningDetector> openingDetectors;
 
     private final ArrayList<Event> reportedEvents;
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
 
     public BurglaryDetector(ArrayList<MovementDetector> movementDetectors, ArrayList<OpeningDetector> openingDetectors) {
         this.movementDetectors = movementDetectors;
@@ -38,7 +42,7 @@ public class BurglaryDetector implements Runnable {
 //                System.out.println("Czujnik ruchu " + detector.getID()
 //                        + ", " + detector.getLocation());
                 if (detector.readSignal() == 1.0) {
-                    reportedEvents.add(new Event(LocalDateTime.now().toString(),
+                    reportedEvents.add(new Event(LocalDateTime.now().format(formatter),
                             detector.getLocation(),
                             EventType.BURGLARY));
                 }
@@ -47,7 +51,7 @@ public class BurglaryDetector implements Runnable {
 //                System.out.println("Czujnik otwarcia " + detector.getID()
 //                        + ", " + detector.getLocation());
                 if (detector.readSignal() == 1.0) {
-                    reportedEvents.add(new Event(LocalDateTime.now().toString(),
+                    reportedEvents.add(new Event(LocalDateTime.now().format(formatter),
                             detector.getLocation(),
                             EventType.BURGLARY));
                 }
