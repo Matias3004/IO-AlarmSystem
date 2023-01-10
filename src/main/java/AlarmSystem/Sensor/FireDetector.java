@@ -6,67 +6,75 @@ import AlarmSystem.Event.EventType;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class FireDetector {
+public class FireDetector implements Runnable {
+
+    private boolean isActive = false;
 
     private final ArrayList<TemperatureDetector> tempDetectors;
     private final ArrayList<SmokeDetector> smokeDetectors;
     private final ArrayList<FireButton> fireButtons;
-    private ArrayList<Event> foundEvents;
+
+
+    private final ArrayList<Event> reportedEvents;
 
     public FireDetector(ArrayList<TemperatureDetector> tempDetectors, ArrayList<SmokeDetector> smokeDetectors, ArrayList<FireButton> fireButtons) {
         this.tempDetectors = tempDetectors;
         this.smokeDetectors = smokeDetectors;
         this.fireButtons = fireButtons;
+
+        this.reportedEvents = new ArrayList<>();
     }
 
-    public void monitorFire() throws InterruptedException {
-        foundEvents = new ArrayList<>();
-        while (true) {
+    @Override
+    public void run() {
+        isActive = true;
+        monitorFire();
+    }
+
+    public void stop() {
+        isActive = false;
+    }
+
+    public void monitorFire() {
+        while (isActive) {
             for (SmokeDetector detector : smokeDetectors) {
-                System.out.println("Sprawdzanie czujnika dymu nr " + detector.getID() +
-                        " w miejscu " + detector.getLocation());
-
-                Thread.sleep(500);
-
-                if (detector.readSignal() < detector.getThreshold())
-                    System.out.println("Jest czysto");
-                else
-                    foundEvents.add(new Event(LocalDateTime.now().toString(), detector.getLocation(), EventType.FIRE));
-            }
-            for (TemperatureDetector detector : tempDetectors) {
-                System.out.println("Sprawdzanie czujnika temperatury nr " + detector.getID() +
-                        " w miejscu " + detector.getLocation());
-
-                Thread.sleep(500);
-
-                if (detector.readSignal() < detector.getThreshold()) {
-                    System.out.println("Jest czysto");
+                System.out.println("Czujnik dymu " + detector.getID()
+                        + ", " + detector.getLocation());
+                if (detector.readSignal() >= detector.getThreshold()) {
+                    reportedEvents.add(new Event(LocalDateTime.now().toString(),
+                            detector.getLocation(),
+                            EventType.FIRE));
                 }
-                else
-                    foundEvents.add(new Event(LocalDateTime.now().toString(), detector.getLocation(), EventType.FIRE));
             }
+
+            for (TemperatureDetector detector : tempDetectors) {
+                System.out.println("Czujnik temperatury " + detector.getID()
+                        + ", " + detector.getLocation());
+                if (detector.readSignal() >= detector.getThreshold()) {
+                    reportedEvents.add(new Event(LocalDateTime.now().toString(),
+                            detector.getLocation(),
+                            EventType.FIRE));
+                }
+            }
+
             for (FireButton button : fireButtons) {
-                System.out.println("Sprawdzanie przycisku nr " + button.getID() +
-                        " w miejscu " + button.getLocation());
-
-                Thread.sleep(500);
-
-                if (button.readSignal() != 1.0)
-                    System.out.println("Jest czysto");
-                else
-                    foundEvents.add(new Event(LocalDateTime.now().toString(), button.getLocation(), EventType.FIRE));
+                System.out.println("Przycisk " + button.getID()
+                        + ", " + button.getLocation());
+                if (button.readSignal() == 1.0) {
+                    reportedEvents.add(new Event(LocalDateTime.now().toString(),
+                            button.getLocation(),
+                            EventType.FIRE));
+                }
             }
-
-            if (!foundEvents.isEmpty()) return;
         }
     }
 
-    public ArrayList<Event> getFoundEvents() {
-        return foundEvents;
+    public ArrayList<Event> getReportedEvents() {
+        return reportedEvents;
     }
 
     public boolean containsEventByLocationType(String location, EventType type) {
-        for (Event ev : foundEvents){
+        for (Event ev : reportedEvents){
             if (ev.getLocation().equals(location) && ev.getType().equals(type)){
                 return true;
             }

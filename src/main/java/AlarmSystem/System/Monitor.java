@@ -32,15 +32,22 @@ public class Monitor {
         burglaryDetector = new BurglaryDetector(movementDetectors, openingDetectors);
     }
 
-    public void monitor() throws InterruptedException {
-        ArrayList<Event> events;
+    public void monitor() {
+        ArrayList<Event> fireEvents;
 
-        fireDetector.monitorFire();
-        events = fireDetector.getFoundEvents();
-        // events.add(burglaryDetector.monitorBurglary());
+        Thread fireDetectorThread = new Thread(fireDetector);
+        fireDetectorThread.start();
 
-        for (Event event : events) {
-            System.out.println(event.toString());
+        fireEvents = fireDetector.getReportedEvents();
+        // fireEvents.add(burglaryDetector.monitorBurglary());
+
+        for (Event fireEvent : fireEvents) {
+            System.out.println(fireEvent.toString());
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
