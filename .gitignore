@@ -1,4 +1,5 @@
 /target
 /*.vpp.bak_*
 /.idea
+.DS_Store
 
