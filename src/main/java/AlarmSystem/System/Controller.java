@@ -21,6 +21,7 @@ public class Controller {
 
     public Controller() throws InterruptedException {
 
+
         /*1. Aktywować system
           2. Dezaktywacja alarmu
           3. Ustawienia
@@ -59,6 +60,7 @@ public class Controller {
             }
         }
     }
+
 
     public boolean activateSystem(Authorization authorization) throws InterruptedException {
         monitor.setActive(true);

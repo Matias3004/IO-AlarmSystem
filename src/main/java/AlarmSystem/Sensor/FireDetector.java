@@ -4,6 +4,7 @@ import AlarmSystem.Event.Event;
 import AlarmSystem.Event.EventType;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class FireDetector implements Runnable {
@@ -16,6 +17,8 @@ public class FireDetector implements Runnable {
 
 
     private final ArrayList<Event> reportedEvents;
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public FireDetector(ArrayList<TemperatureDetector> tempDetectors, ArrayList<SmokeDetector> smokeDetectors, ArrayList<FireButton> fireButtons) {
         this.tempDetectors = tempDetectors;
@@ -38,30 +41,32 @@ public class FireDetector implements Runnable {
     public void monitorFire() {
         while (isActive) {
             for (SmokeDetector detector : smokeDetectors) {
-                //System.out.println("Czujnik dymu " + detector.getID()
-                        //+ ", " + detector.getLocation());
+
+//                System.out.println("Czujnik dymu " + detector.getID()
+//                        + ", " + detector.getLocation());
                 if (detector.readSignal() >= detector.getThreshold() && !containsEventByLocationType(detector.getLocation(), EventType.FIRE)) {
-                    reportedEvents.add(new Event(LocalDateTime.now().toString(),
+                    reportedEvents.add(new Event(LocalDateTime.now().format(formatter),
                             detector.getLocation(),
                             EventType.FIRE));
                 }
             }
 
             for (TemperatureDetector detector : tempDetectors) {
-                //System.out.println("Czujnik temperatury " + detector.getID()
-                        //+ ", " + detector.getLocation());
+//                System.out.println("Czujnik temperatury " + detector.getID()
+//                        + ", " + detector.getLocation());
                 if (detector.readSignal() >= detector.getThreshold() && !containsEventByLocationType(detector.getLocation(), EventType.FIRE)) {
-                    reportedEvents.add(new Event(LocalDateTime.now().toString(),
+                    reportedEvents.add(new Event(LocalDateTime.now().format(formatter),
                             detector.getLocation(),
                             EventType.FIRE));
                 }
             }
 
             for (FireButton button : fireButtons) {
-                //System.out.println("Przycisk " + button.getID()
-                        //+ ", " + button.getLocation());
+
+//                System.out.println("Przycisk " + button.getID()
+//                        + ", " + button.getLocation());
                 if (button.readSignal() == 1.0 && !containsEventByLocationType(button.getLocation(), EventType.FIRE)) {
-                    reportedEvents.add(new Event(LocalDateTime.now().toString(),
+                    reportedEvents.add(new Event(LocalDateTime.now().format(formatter),
                             button.getLocation(),
                             EventType.FIRE));
                 }
