@@ -45,6 +45,7 @@ public class Controller {
                         activateSystem(authorization);
                     }else{
                         deactivateSystem(authorization);
+
                         System.out.println("The system was deactivated!");
                     }
                     break;
@@ -60,14 +61,15 @@ public class Controller {
     }
 
     public boolean activateSystem(Authorization authorization) throws InterruptedException {
+        monitor.setActive(true);
         monitor.monitor();
 
         return true;
     }
 
     public boolean deactivateSystem(Authorization authorization) {
-        // TODO - implement Controller.deactivateSystem
-        throw new UnsupportedOperationException();
+        monitor.setActive(false);
+        return true;
     }
 
     public void callAuthorities(String alarmData) {

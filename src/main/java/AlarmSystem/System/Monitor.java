@@ -14,6 +14,12 @@ public class Monitor {
     private final ArrayList<SmokeDetector> smokeDetectors;
     private final ArrayList<FireButton> fireButtons;
 
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    private boolean isActive = true;
+
     private final ArrayList<OpeningDetector> openingDetectors;
     private final ArrayList<MovementDetector> movementDetectors;
 
@@ -31,24 +37,18 @@ public class Monitor {
         fireDetector = new FireDetector(temperatureDetectors, smokeDetectors, fireButtons);
         burglaryDetector = new BurglaryDetector(movementDetectors, openingDetectors);
     }
-
     public void monitor() {
         ArrayList<Event> fireEvents;
 
         Thread fireDetectorThread = new Thread(fireDetector);
         fireDetectorThread.start();
 
-        fireEvents = fireDetector.getReportedEvents();
-        // fireEvents.add(burglaryDetector.monitorBurglary());
 
-        for (Event fireEvent : fireEvents) {
-            System.out.println(fireEvent.toString());
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+        fireEvents = fireDetector.getReportedEvents(); //TODO new thread for monitor
+        for (Event ev : fireEvents) {
+            System.out.println(ev.toString());
         }
+
     }
 
     public void initializeFireSensors() {
