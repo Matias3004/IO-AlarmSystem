@@ -19,7 +19,7 @@ public class Controller {
         return this.isActive;
     }
 
-    public Controller() throws InterruptedException {
+    public Controller() {
         System.out.print("Aktywować system? [T/N]: ");
         String answer = in.nextLine();
         if (answer.equalsIgnoreCase("N")) return;
@@ -27,7 +27,7 @@ public class Controller {
         isActive = activateSystem();
     }
 
-    public boolean activateSystem() throws InterruptedException {
+    public boolean activateSystem() {
         monitor.monitor();
 
         return true;

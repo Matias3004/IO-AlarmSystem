@@ -34,15 +34,29 @@ public class Monitor {
 
     public void monitor() {
         ArrayList<Event> fireEvents;
+        ArrayList<Event> trespassingEvents;
 
         Thread fireDetectorThread = new Thread(fireDetector);
         fireDetectorThread.start();
+        Thread burglaryDetectorThread = new Thread(burglaryDetector);
+        burglaryDetectorThread.start();
 
         fireEvents = fireDetector.getReportedEvents();
-        // fireEvents.add(burglaryDetector.monitorBurglary());
+        trespassingEvents = burglaryDetector.getReportedEvents();
 
         for (Event fireEvent : fireEvents) {
             System.out.println(fireEvent.toString());
+
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        for (Event trespassingEvent : trespassingEvents) {
+            System.out.println(trespassingEvent.toString());
+
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
