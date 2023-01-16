@@ -6,6 +6,7 @@ public class User {
     private UserData userData;
 
     public User(String username) {
+        this.userData = new UserData();
         this.userData.setUsername(username);
     }
 

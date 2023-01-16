@@ -8,6 +8,12 @@ public class SmokeDetector implements ISensor {
     private final String location;
     private final double threshold;
 
+    public void setValue(double value) {
+        this.value = value;
+    }
+
+    private double value;
+
     private final Random rnd = new Random();
 
     public SmokeDetector(int id, String location, double threshold) {
@@ -28,8 +34,11 @@ public class SmokeDetector implements ISensor {
         return this.threshold;
     }
 
+    public void updateReadings() {
+        value =  100 * rnd.nextDouble();
+    }
     @Override
     public double readSignal() {
-        return 100 * rnd.nextDouble();
+        return value;
     }
 }

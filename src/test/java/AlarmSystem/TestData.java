@@ -1,4 +1,4 @@
-package AlarmSystemTest;
+package AlarmSystem;
 
 import AlarmSystem.Sensor.*;
 

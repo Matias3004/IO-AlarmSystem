@@ -5,8 +5,11 @@ import java.util.Scanner;
 
 public class Authorization {
 
-    private ArrayList<User> users;
+    private ArrayList<User> users = new ArrayList<>();
+    private ArrayList<User> loggedUsers = new ArrayList<>();
     private int sessionDuration;
+
+
 
     Scanner in = new Scanner(System.in);
 
@@ -18,15 +21,27 @@ public class Authorization {
         this.users = users;
     }
 
-    public boolean authorize(User user) {
-        System.out.print("Podaj hasło: ");
-        String password = in.nextLine();
+    public boolean isLoggedIn(User u){
+        for (User user : loggedUsers){
+            return user.equals(u);
+        }
+        return false;
+    }
+    public void addUser(User user) {
+        users.add(user);
+    }
 
-        return user.getUserData().getPassword().equals(password);
+    public boolean authorize(String username, String password) {
+        for (User user : users) {
+            if (user.getUserData().getPassword().compareTo(password) == 0 && user.getUserData().getUsername().compareTo(username) == 0) {
+                loggedUsers.add(user);
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean logout(User user) {
-        // TODO - implement Authorization.logout
-        throw new UnsupportedOperationException();
+        return loggedUsers.remove(user);
     }
 }

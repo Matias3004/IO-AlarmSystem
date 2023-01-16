@@ -30,16 +30,23 @@ public class FireDetector implements Runnable {
 
     @Override
     public void run() {
-        isActive = true;
-        monitorFire();
+        activate();
+        try {
+            monitorFire();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
+    public void activate(){
+        isActive = true;
+    }
     public void stop() {
         isActive = false;
     }
 
-    public void monitorFire() {
-        while (isActive) {
+    public void monitorFire() throws Exception {
+        while (isActive && reportedEvents.size() == 0) {
             for (SmokeDetector detector : smokeDetectors) {
                 if (detector.readSignal() >= detector.getThreshold() && !containsEventByLocationType(detector.getLocation(), EventType.FIRE)) {
                     reportedEvents.add(new Event(LocalDateTime.now().format(formatter),
@@ -70,10 +77,15 @@ public class FireDetector implements Runnable {
         return reportedEvents;
     }
 
-    public boolean containsEventByLocationType(String location, EventType type) {
+    public boolean containsEventByLocationType(String location, EventType type) throws Exception {
         for (Event ev : reportedEvents){
-            if (ev.getLocation().equals(location) && ev.getType().equals(type)){
-                return true;
+            if (location != null && type != null) {
+                if (ev.getLocation().equals(location) && ev.getType().equals(type)) {
+                    return true;
+                }
+            }else{
+                Exception NullPointerException = null;
+                throw NullPointerException;
             }
         }
         return false;

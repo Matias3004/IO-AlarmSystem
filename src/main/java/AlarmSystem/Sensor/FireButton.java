@@ -6,6 +6,11 @@ public class FireButton implements ISensor {
 
     private final int ID;
     private final String location;
+
+    public boolean isPressed() {
+        return isPressed;
+    }
+
     private boolean isPressed;
 
     private final Random rnd;

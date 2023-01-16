@@ -8,6 +8,12 @@ public class TemperatureDetector implements ISensor {
     private final String location;
     private final double threshold;
 
+    public void setValue(double value) {
+        this.value = value;
+    }
+
+    private double value;
+
     public TemperatureDetector(int id, String location, double threshold) {
         this.ID = id;
         this.location = location;
@@ -26,8 +32,12 @@ public class TemperatureDetector implements ISensor {
         return this.threshold;
     }
 
+    public void updateReadings(){
+        value = ThreadLocalRandom.current().nextDouble(18, 800);
+    }
+
     @Override
     public double readSignal() {
-        return ThreadLocalRandom.current().nextDouble(18, 800);
+        return value;
     }
 }
