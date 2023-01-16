@@ -2,17 +2,18 @@ package AlarmSystem.System;
 
 import AlarmSystem.Event.Event;
 import AlarmSystem.Event.EventType;
+
 import jdk.jfr.Category;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@Category("Zadanie 4")
-class ControllerTest {
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Category("System Controller Test")
+public class ControllerTest {
 
     User testAdminUser;
     UserData testAdminData;
@@ -21,6 +22,7 @@ class ControllerTest {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     User testUser;
     UserData testUserData;
+
     @BeforeEach
     void setUp() {
         cont = new Controller();
@@ -41,6 +43,7 @@ class ControllerTest {
     }
 
     @Test
+    @Order(0)
     void activateSystemTest() throws InterruptedException {
         assertFalse(Controller.activateSystem(testAdminUser));
         cont.authorize(testAdminUser.getUserData().getUsername(), testAdminUser.getUserData().getPassword());
@@ -49,6 +52,7 @@ class ControllerTest {
     }
 
     @Test
+    @Order(2)
     void callAuthoritiesTest() {
         Event fev = new Event(LocalDateTime.now().format(formatter),
                 "TestLocation",
@@ -66,6 +70,7 @@ class ControllerTest {
     }
 
     @Test
+    @Order(1)
     void authorizeTest() {
         assertFalse(cont.authorize(testUser.getUserData().getUsername(), testUser.getUserData().getPassword()));
         assertFalse(cont.authorize("", ""));

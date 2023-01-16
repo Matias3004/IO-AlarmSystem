@@ -3,25 +3,22 @@ package AlarmSystem.Sensor;
 import AlarmSystem.Event.Event;
 import AlarmSystem.Event.EventType;
 import AlarmSystem.TestData;
-import AlarmSystem.Sensor.FireDetector;
+
 import jdk.jfr.Category;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.jupiter.api.MethodOrderer;
-
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@Category("Zadanie 3")
+@Category("Fire Detector Test")
 public class FireDetectorTest {
 
     TestData testData;
     FireDetector fireDetector;
 
     ArrayList<Event> reportedEvents;
-
 
     @BeforeEach
     void setUp() {
@@ -46,6 +43,7 @@ public class FireDetectorTest {
             fireDetector.containsEventByLocationType(null, null);
         }, "NullPointerException expected");
     }
+
     @Test
     @DisplayName("Fire detector reports fires")
     @Order(1)
@@ -59,5 +57,4 @@ public class FireDetectorTest {
         reportedEvents = fireDetector.getReportedEvents();
         assertTrue(reportedEvents.size() > 0);
     }
-
 }
