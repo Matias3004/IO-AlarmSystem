@@ -1,8 +1,9 @@
-package AlarmSystem.Sensor;
+package JUnit.AlarmSystem.Sensor;
 
 import AlarmSystem.Event.Event;
 import AlarmSystem.Event.EventType;
-import AlarmSystem.TestData;
+import AlarmSystem.Sensor.FireDetector;
+import JUnit.AlarmSystem.TestData;
 
 import jdk.jfr.Category;
 import org.junit.jupiter.api.*;

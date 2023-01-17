@@ -1,8 +1,11 @@
-package AlarmSystem.System;
+package JUnit.AlarmSystem.System;
 
 import AlarmSystem.Event.Event;
 import AlarmSystem.Event.EventType;
 
+import AlarmSystem.System.Controller;
+import AlarmSystem.System.User;
+import AlarmSystem.System.UserData;
 import jdk.jfr.Category;
 import org.junit.jupiter.api.*;
 

@@ -1,11 +1,11 @@
-package AlarmSystem;
+package JMockit.AlarmSystem;
 
 import AlarmSystem.Sensor.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class TestData {
+public class TestDataMock {
 
     public ArrayList<TemperatureDetector> temperatureDetectors = new ArrayList<>(
             Arrays.asList(

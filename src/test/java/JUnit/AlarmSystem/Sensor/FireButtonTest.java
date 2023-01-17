@@ -1,5 +1,6 @@
-package AlarmSystem.Sensor;
+package JUnit.AlarmSystem.Sensor;
 
+import AlarmSystem.Sensor.FireButton;
 import jdk.jfr.Category;
 import org.junit.jupiter.api.*;
 

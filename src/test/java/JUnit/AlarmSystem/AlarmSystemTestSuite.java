@@ -1,8 +1,8 @@
-package AlarmSystem;
+package JUnit.AlarmSystem;
 
-import AlarmSystem.Sensor.FireButtonTest;
-import AlarmSystem.Sensor.FireDetectorTest;
-import AlarmSystem.System.ControllerTest;
+import JUnit.AlarmSystem.Sensor.FireButtonTest;
+import JUnit.AlarmSystem.Sensor.FireDetectorTest;
+import JUnit.AlarmSystem.System.ControllerTest;
 
 import org.junit.platform.suite.api.SelectClasses;
 import org.junit.platform.suite.api.Suite;
