@@ -2,4 +2,5 @@
 /*.vpp.bak_*
 /.idea
 .DS_Store
-
+**/test/java/FitNesseTests/FitNesseRoot
+**/test/java/FitNesseTests/fitnesse-standalone.jar
