@@ -10,7 +10,6 @@ public class SetUp extends Fixture {
     static FireButton fireButton;
 
     public SetUp() {
-        controller = new Controller();
         fireButton = new FireButton(1, "Korytarz");
     }
 

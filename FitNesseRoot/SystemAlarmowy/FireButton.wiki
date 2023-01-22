@@ -1,0 +1,7 @@
+---
+Test
+---
+!|FitNesseTests.FitNesseTestsFixture.TestFireButton|
+|location|getLocationTest?|
+|Magazyn |false           |
+|Korytarz|true            |

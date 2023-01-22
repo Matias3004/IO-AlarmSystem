@@ -1,0 +1,5 @@
+!1 Zestaw testów ${PAGE_NAME}
+!contents -R2 -g -p -f -h
+
+"Testy akceptacyjne systemu alarmowego"
+!path C:\Users\stepp\Documents\PlatformIO\Projects\IO-AlarmSystem\target\classes

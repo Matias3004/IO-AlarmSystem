@@ -5,7 +5,7 @@ import java.util.Random;
 public class FireButton implements ISensor {
 
     private final int ID;
-    private final String location;
+    private String location;
 
     public boolean isPressed() {
         return isPressed;
@@ -40,5 +40,9 @@ public class FireButton implements ISensor {
 
             return 0.0;
         }
+    }
+
+    public void setLocation(String loc) {
+        location = loc;
     }
 }

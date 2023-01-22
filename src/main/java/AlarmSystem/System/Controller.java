@@ -52,7 +52,7 @@ public class Controller {
             String answer = in.nextLine();
 
             switch (answer) {
-                case "1" -> {
+                case "1": {
                     if (!isActive()) {
                         activateSystem(user);
                         isActive = true;
@@ -65,11 +65,11 @@ public class Controller {
                         System.out.println("The system was deactivated!");
                     }
                 }
-                case "2" ->
+                case "2":
                         System.out.println("TODO ustawienia może progów na czujnikach czy tam numerów telefonów służb");
-                case "3" -> System.exit(0);
-                case "4" -> authorization.authorize(user.getUserData().getUsername(), user.getUserData().getPassword());
-                default -> {
+                case "3": System.exit(0);
+                case "4": authorization.authorize(user.getUserData().getUsername(), user.getUserData().getPassword());
+                default: {
                     return;
                 }
             }
