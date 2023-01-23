@@ -2,4 +2,4 @@
 !contents -R2 -g -p -f -h
 
 "Testy akceptacyjne systemu alarmowego"
-!path C:\Users\stepp\Documents\PlatformIO\Projects\IO-AlarmSystem\target\classes
+!path /Users/mateuszmuziol/Documents/IO/Lab/SystemAlarmowy/target/classes

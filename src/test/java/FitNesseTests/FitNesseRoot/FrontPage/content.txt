@@ -1,2 +1,0 @@
-!1 [[SystemAlarmowy][FrontPage.SystemAlarmowy]]!
-!3 ''Testy akceptacyjne systemu alarmowego''

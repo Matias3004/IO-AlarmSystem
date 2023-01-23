@@ -1,5 +1,0 @@
----
-Test
----
-!|FitNesseTestsFixture.TestFireButton|
-|getLocationTest?|readSignalTest?|
