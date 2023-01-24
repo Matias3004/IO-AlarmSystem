@@ -46,29 +46,27 @@ public class FireDetector implements Runnable {
     }
 
     public void monitorFire() throws Exception {
-        while (isActive && reportedEvents.size() == 0) {
-            for (SmokeDetector detector : smokeDetectors) {
-                if (detector.readSignal() >= detector.getThreshold() && !containsEventByLocationType(detector.getLocation(), EventType.FIRE)) {
-                    reportedEvents.add(new Event(LocalDateTime.now().format(formatter),
-                            detector.getLocation(),
-                            EventType.FIRE));
-                }
+        for (SmokeDetector detector : smokeDetectors) {
+            if (detector.readSignal() >= detector.getThreshold() && !containsEventByLocationType(detector.getLocation(), EventType.FIRE)) {
+                reportedEvents.add(new Event(LocalDateTime.now().format(formatter),
+                        detector.getLocation(),
+                        EventType.FIRE));
             }
+        }
 
-            for (TemperatureDetector detector : tempDetectors) {
-                if (detector.readSignal() >= detector.getThreshold() && !containsEventByLocationType(detector.getLocation(), EventType.FIRE)) {
-                    reportedEvents.add(new Event(LocalDateTime.now().format(formatter),
-                            detector.getLocation(),
-                            EventType.FIRE));
-                }
+        for (TemperatureDetector detector : tempDetectors) {
+            if (detector.readSignal() >= detector.getThreshold() && !containsEventByLocationType(detector.getLocation(), EventType.FIRE)) {
+                reportedEvents.add(new Event(LocalDateTime.now().format(formatter),
+                        detector.getLocation(),
+                        EventType.FIRE));
             }
+        }
 
-            for (FireButton button : fireButtons) {
-                if (button.readSignal() == 1.0 &&!containsEventByLocationType(button.getLocation(), EventType.FIRE)) {
-                    reportedEvents.add(new Event(LocalDateTime.now().format(formatter),
-                            button.getLocation(),
-                            EventType.FIRE));
-                }
+        for (FireButton button : fireButtons) {
+            if (button.readSignal() == 1.0 &&!containsEventByLocationType(button.getLocation(), EventType.FIRE)) {
+                reportedEvents.add(new Event(LocalDateTime.now().format(formatter),
+                        button.getLocation(),
+                        EventType.FIRE));
             }
         }
     }

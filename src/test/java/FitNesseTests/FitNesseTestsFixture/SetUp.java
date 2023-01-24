@@ -16,9 +16,9 @@ public class SetUp extends Fixture {
     static SmokeDetector smokeDetector;
     static FireButton fireButton;
 
-    static ArrayList<TemperatureDetector> temperatureDetectors;
-    static ArrayList<SmokeDetector> smokeDetectors;
-    static ArrayList<FireButton> fireButtons;
+    static ArrayList<TemperatureDetector> temperatureDetectors = new ArrayList<>();
+    static ArrayList<SmokeDetector> smokeDetectors = new ArrayList<>();
+    static ArrayList<FireButton> fireButtons = new ArrayList<>();
 
     public SetUp() {
         temperatureDetector = new TemperatureDetector(1, "Biuro", 80.0);

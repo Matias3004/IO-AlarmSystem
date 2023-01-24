@@ -1,0 +1,13 @@
+!|FitNesseTests.FitNesseTestsFixture.TestFireDetector|
+|eventCount|tempDetectorSignal|smokeDetectorSignal|fireButtonSignal|monitorFireTest?|
+|0         |20.0              |20.0               |0.0             |true            |
+|1         |30.0              |30.0               |0.0             |false           |
+|1         |30.0              |40.0               |0.0             |true            |
+|2         |30.0              |45.0               |1.0             |true            |
+|3         |60.0              |60.0               |1.0             |false           |
+|3         |100.0             |80.0               |1.0             |true            |
+
+!|FitNesseTests.FitNesseTestsFixture.TestFireDetector|
+|eventLocation|testLocation|containsEventByLocationTypeTest?|
+|Korytarz     |Biuro       |false                           |
+|Biuro        |Biuro       |true                            |

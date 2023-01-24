@@ -4,6 +4,8 @@ import java.util.Random;
 
 public class FireButton implements ISensor {
 
+    private double value;
+
     private final int ID;
     private String location;
 
@@ -14,6 +16,10 @@ public class FireButton implements ISensor {
     private boolean isPressed;
 
     private final Random rnd;
+
+    public void setValue(double value) {
+        this.value = value;
+    }
 
     public FireButton(int id, String location) {
         rnd = new Random();
@@ -31,6 +37,10 @@ public class FireButton implements ISensor {
 
     @Override
     public double readSignal() {
+        return value;
+    }
+
+    public double updateReadings() {
         if (rnd.nextBoolean()) {
             this.isPressed = true;
 

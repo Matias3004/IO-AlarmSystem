@@ -20,7 +20,7 @@ public class TestFireButton extends ColumnFixture {
     }
 
     public double readSignalTest() {
-        return setUp.getFireButton().readSignal();
+        return setUp.getFireButton().updateReadings();
     }
 
     public void setLocation(String loc){

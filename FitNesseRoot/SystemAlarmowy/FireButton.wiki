@@ -2,7 +2,11 @@
 Test
 ---
 !|FitNesseTests.FitNesseTestsFixture.TestFireButton|
-|location|getLocationTest?|readSignalTest?|
-|Magazyn |false           |0.0<=_<=1.0    |
+|location|getLocationTest?|
+|Magazyn |false           |
 |Korytarz|true            |               
-|null    |false           |              
+|null    |false           |    
+
+!|FitNesseTests.FitNesseTestsFixture.TestFireButton|
+|readSignalTest?|
+|0.0<=_<=1.0    |
